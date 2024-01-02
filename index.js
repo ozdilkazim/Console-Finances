@@ -87,13 +87,50 @@ var finances = [
   ['Feb-2017', 671099],
 ];
 
-var arrayLenght = finances.length;
-var total = 0;
+// Total Months
+var totalMonths = finances.length;
 
-for (i=0 ; i < arrayLenght; i++) {
-   total += finances[i][1];
+// Total Amount
+var totalAmount = 0;
+for (i=0 ; i < totalMonths; i++) {
+  totalAmount += finances[i][1];
 }
 
+// Change of Profits/Losses in months
+var changeMonthTotal = 0;
+var changeMonthAvg = 0;
+for (n=1 ; n < totalMonths; n++) {
+  changeMonthTotal += (finances[n][1] - finances[n-1][1]);
+}
+changeMonthAvg = (changeMonthTotal / (totalMonths - 1)).toFixed(2);
 
-console.log(arrayLenght);
-console.log(total);
+// Creating Difference Array
+var max = 0;
+var min = 0;
+var changeMonth = [];
+changeArray = finances;
+for (j = 0 ; j < totalMonths-1; j++) {
+  changeMonth = (finances[j+1][1] - finances[j][1]);
+  // console.log(changeMonth);
+  changeArray[j][1] = changeMonth;
+  //console.log(changeArray[j][0] + " " + changeArray[j][1]);
+
+}
+
+// Find the maximum and minimum value
+// Select the second column of array
+var changeArraycol2 = changeArray.map(function(value,index) { return value[1]; });
+// Sort Function
+function compareNumbers(a, b) {
+  return a - b;
+}
+var sortedArray = changeArraycol2.sort(compareNumbers);
+min = sortedArray[0];
+max = sortedArray[sortedArray.length-1];
+
+// Write Greatest Increase in Profits/Losses 
+console.log("Total Months: "+ totalMonths);
+console.log("Total : $" + totalAmount);
+console.log("Change Month : $" + changeMonthAvg);
+console.log("Max : $" + max);
+console.log("Min : $" + min);
