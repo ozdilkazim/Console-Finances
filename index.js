@@ -116,7 +116,7 @@ for (j = 0 ; j < totalMonths-1; j++) {
   //console.log(changeArray[j][0] + " " + changeArray[j][1]);
 
 }
-
+var changeArraycolA = changeArray.map(function(value,index) { return value[1]; });
 // Find the maximum and minimum value
 // Select the second column of array
 var changeArraycol2 = changeArray.map(function(value,index) { return value[1]; });
@@ -128,9 +128,19 @@ var sortedArray = changeArraycol2.sort(compareNumbers);
 min = sortedArray[0];
 max = sortedArray[sortedArray.length-1];
 
+// Find the maximum - minimum value index
+var maxIndex = changeArraycolA.indexOf(max);
+var minIndex = changeArraycolA.indexOf(min);
+
+// Find the maximum - minimum value date
+var maxIndexDate = changeArray[maxIndex+1][0];
+var minIndexDate = changeArray[minIndex+1][0];
+
 // Write Greatest Increase in Profits/Losses 
+console.log("Financial Analysis");
+console.log("-----------------------------");
 console.log("Total Months: "+ totalMonths);
 console.log("Total : $" + totalAmount);
-console.log("Change Month : $" + changeMonthAvg);
-console.log("Max : $" + max);
-console.log("Min : $" + min);
+console.log("Average Change : $" + changeMonthAvg);
+console.log("Greatest Increase in Profit/Losses : "+ maxIndexDate + " ($ " + max + ")");
+console.log("Greatest Decrease in Profit/Losses : "+ minIndexDate + " ($ " + min + ")");
